@@ -9,6 +9,7 @@ import android.view.MenuItem
 import android.widget.Button
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,6 +17,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
+
+        Timber.plant(Timber.DebugTree())
 
         findViewById<Button>(R.id.button_home).setOnClickListener { view ->
             findNavController(R.id.nav_host_fragment).navigate(R.id.action_to_HomeFragment)

@@ -9,6 +9,7 @@ import android.widget.Button
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import io.droidcrew.recycler.contraint_items.ConstraintListAdapter
 import io.droidcrew.recycler.list.HeavyListAdapter
 import io.droidcrew.recycler.models.HeavyModelFactory
 
@@ -29,7 +30,7 @@ class FirstFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         view.findViewById<RecyclerView>(R.id.recycler_view).apply {
-            adapter = HeavyListAdapter(HeavyModelFactory.create(500))
+            adapter = ConstraintListAdapter(HeavyModelFactory.create(500))
             layoutManager = LinearLayoutManager(activity)
             adapter?.notifyDataSetChanged()
         }

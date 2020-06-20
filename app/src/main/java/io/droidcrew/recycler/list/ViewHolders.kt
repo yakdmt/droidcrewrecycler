@@ -24,7 +24,7 @@ object HeavyViewHolderFactory {
     fun createHolder(parent: ViewGroup, viewType: Int) : HeavyViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)
         //Simulation of long view creation
-        Thread.sleep(20)
+//        Thread.sleep(20)
         return when (viewType) {
             TYPE_RED -> RedViewHolder(view)
             TYPE_ORANGE -> OrangeViewHolder(view)
@@ -45,7 +45,7 @@ abstract class HeavyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     abstract val color: Int
 
-    private val textView = view.findViewById<TextView>(R.id.text)
+    private val textView = view.findViewById<TextView>(R.id.title)
 
     fun bind(text: String) {
         textView.text = text
