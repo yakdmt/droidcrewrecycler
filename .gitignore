@@ -8,3 +8,4 @@ build/
 /ajcore*
 captures
 reports
+.idea/
