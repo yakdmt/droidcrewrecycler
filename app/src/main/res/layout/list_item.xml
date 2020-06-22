@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:textStyle="italic"
         android:textSize="16dp"
-        android:text="Description lorem ipsum"
+        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"
         android:layout_marginTop="8dp"/>
 
     <ImageView

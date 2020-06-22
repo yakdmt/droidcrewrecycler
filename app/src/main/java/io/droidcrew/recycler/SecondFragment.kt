@@ -5,8 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.droidcrew.recycler.list.HeavyListAdapter
@@ -32,6 +30,7 @@ class SecondFragment : Fragment() {
             adapter = HeavyListAdapter(HeavyModelFactory.create(500))
             layoutManager = LinearLayoutManager(activity)
             adapter?.notifyDataSetChanged()
+            setRecycledViewPool((activity as MainActivity).viewPool)
         }
     }
 }

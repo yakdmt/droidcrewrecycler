@@ -5,12 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import io.droidcrew.recycler.list.HeavyListAdapter
 import io.droidcrew.recycler.models.HeavyModelFactory
+import io.droidcrew.recycler.snippet.SnippetListAdapter
+import io.droidcrew.recycler.snippet.SnippetRecyclerViewState
+import io.droidcrew.recycler.snippet.items.TitleViewState
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -29,9 +29,15 @@ class ThirdFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         view.findViewById<RecyclerView>(R.id.recycler_view).apply {
-            adapter = HeavyListAdapter(HeavyModelFactory.create(500))
+            adapter = SnippetListAdapter(HeavyModelFactory.create(500).map { SnippetRecyclerViewState(
+                listOf(
+                    TitleViewState(it.title),
+                    TitleViewState(it.title)
+                )
+            ) })
             layoutManager = LinearLayoutManager(activity)
             adapter?.notifyDataSetChanged()
+            setRecycledViewPool((activity as MainActivity).viewPool)
         }
     }
 }

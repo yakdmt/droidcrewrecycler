@@ -13,10 +13,10 @@ class ConstraintListAdapter(private val items: List<HeavyModel>): RecyclerView.A
     override fun getItemCount(): Int = items.size
 
     override fun onBindViewHolder(holder: ConstraintViewHolder, position: Int) {
-        holder.bind(position.toString())
+        holder.bind(items[position])
     }
 
     override fun getItemViewType(position: Int): Int {
-        return (position / 50).coerceAtMost(9)
+        return (position / 4) % 4
     }
 }

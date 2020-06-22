@@ -29,6 +29,27 @@ class ScrollPerfTest {
         threshold = 1,
         assertionType = PerformanceTest.AssertionType.LESS_OR_EQUAL
     )
+    fun testFirst() {
+
+        Espresso.onView(ViewMatchers.withId(R.id.button_first))
+            .perform(ViewActions.click())
+
+        SystemClock.sleep(1000)
+
+        mainActivityActivityTestRule.startIteration()
+        for (i in 0..10) {
+            device.swipe(200, 1500, 500, 700, 5)
+            SystemClock.sleep(500)
+        }
+    }
+
+    @Test
+    @PerformanceTest(
+        processName = PACKAGE_NAME,
+        perfType = PerformanceTest.PerfType.NUM_JANKY,
+        threshold = 1,
+        assertionType = PerformanceTest.AssertionType.LESS_OR_EQUAL
+    )
     fun testSecond() {
 
         Espresso.onView(ViewMatchers.withId(R.id.button_second))
@@ -50,9 +71,9 @@ class ScrollPerfTest {
         threshold = 1,
         assertionType = PerformanceTest.AssertionType.LESS_OR_EQUAL
     )
-    fun testFirst() {
+    fun testThird() {
 
-        Espresso.onView(ViewMatchers.withId(R.id.button_first))
+        Espresso.onView(ViewMatchers.withId(R.id.button_third))
             .perform(ViewActions.click())
 
         SystemClock.sleep(1000)
