@@ -4,26 +4,30 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
+import io.droidcrew.recycler.R
 import io.droidcrew.recycler.snippet.SnippetViewHolder
 import io.droidcrew.recycler.snippet.SnippetViewState
 import io.droidcrew.recycler.snippet.StateRenderer
+import io.droidcrew.recycler.utils.dp
 
 data class ImageViewState(val isWide: Boolean) :
     SnippetViewState
 
-open class SomeImageView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
-    AppCompatTextView(context, attrs, defStyleAttr),
+class SomeImageView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
+    AppCompatImageView(context, attrs, defStyleAttr),
     StateRenderer<ImageViewState> {
 
+    init {
+        layoutParams = ViewGroup.LayoutParams(72.dp, 72.dp)
+    }
+
     override fun render(state: ImageViewState) {
-        val layoutParams = layoutParams
         if (state.isWide) {
-            layoutParams.height = 256
-            layoutParams.width = MATCH_PARENT
+            setImageResource(R.drawable.bookmark_16)
         } else {
-            layoutParams.height = 128
-            layoutParams.width = 128
+            setImageResource(R.drawable.navi_24)
         }
     }
 }

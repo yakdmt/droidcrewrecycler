@@ -16,16 +16,10 @@ object ConstraintViewHolderFactory {
         //Simulation of long view creation
 //        Thread.sleep(20)
         return when (viewType) {
-            HeavyViewHolderFactory.TYPE_RED -> RedConstraintViewHolder(view)
-            HeavyViewHolderFactory.TYPE_ORANGE -> OrangeConstraintViewHolder(view)
-            HeavyViewHolderFactory.TYPE_YELLOW -> YellowConstraintViewHolder(view)
-            HeavyViewHolderFactory.TYPE_GREEN -> GreenConstraintViewHolder(view)
-            HeavyViewHolderFactory.TYPE_BLUE -> BlueConstraintViewHolder(view)
-            HeavyViewHolderFactory.TYPE_INDIGO -> IndigoConstraintViewHolder(view)
-            HeavyViewHolderFactory.TYPE_VIOLET -> VioletConstraintViewHolder(view)
-            HeavyViewHolderFactory.TYPE_BROWN -> BrownConstraintViewHolder(view)
-            HeavyViewHolderFactory.TYPE_FUCHSIA -> FuchsiaConstraintViewHolder(view)
-            HeavyViewHolderFactory.TYPE_GOLD -> GoldConstraintViewHolder(view)
+            HeavyViewHolderFactory.TYPE_SMALL_IMAGE_WITH_BUTTONS -> RedConstraintViewHolder(view)
+            HeavyViewHolderFactory.TYPE_SMALL_IMAGE -> OrangeConstraintViewHolder(view)
+            HeavyViewHolderFactory.TYPE_WIDE_IMAGE_WITH_BUTTONS -> YellowConstraintViewHolder(view)
+            HeavyViewHolderFactory.TYPE_WIDE_IMAGE -> GreenConstraintViewHolder(view)
             else -> throw IllegalArgumentException("Unknown viewType")
         }
     }

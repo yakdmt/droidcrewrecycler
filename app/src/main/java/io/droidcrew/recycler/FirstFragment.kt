@@ -30,7 +30,7 @@ class FirstFragment : Fragment() {
             adapter = ConstraintListAdapter(HeavyModelFactory.create(500))
             layoutManager = LinearLayoutManager(activity)
             adapter?.notifyDataSetChanged()
-            setRecycledViewPool((activity as MainActivity).viewPool)
+//            setRecycledViewPool((activity as MainActivity).viewPool)
         }
 
 

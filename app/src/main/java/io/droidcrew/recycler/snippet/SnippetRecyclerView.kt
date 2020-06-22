@@ -2,8 +2,8 @@ package io.droidcrew.recycler.snippet
 
 import android.content.Context
 import android.util.AttributeSet
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import io.droidcrew.recycler.snippet.layout.SnippetLayoutManager
 
 data class SnippetRecyclerViewState(val items: List<SnippetViewState>)
 
@@ -13,7 +13,7 @@ class SnippetRecyclerView @JvmOverloads constructor(context: Context, attrs: Att
     private val adapter = SnippetRecyclerAdapter()
 
     init {
-        this.layoutManager = LinearLayoutManager(this.context) //TODO custom layout manager
+        this.layoutManager = SnippetLayoutManager()
         setAdapter(adapter)
     }
 

@@ -5,10 +5,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import io.droidcrew.recycler.R
-import io.droidcrew.recycler.list.HeavyViewHolderFactory.TYPE_ORANGE
-import io.droidcrew.recycler.list.HeavyViewHolderFactory.TYPE_GREEN
-import io.droidcrew.recycler.list.HeavyViewHolderFactory.TYPE_RED
-import io.droidcrew.recycler.list.HeavyViewHolderFactory.TYPE_YELLOW
+import io.droidcrew.recycler.list.HeavyViewHolderFactory.TYPE_SMALL_IMAGE
+import io.droidcrew.recycler.list.HeavyViewHolderFactory.TYPE_WIDE_IMAGE
+import io.droidcrew.recycler.list.HeavyViewHolderFactory.TYPE_SMALL_IMAGE_WITH_BUTTONS
+import io.droidcrew.recycler.list.HeavyViewHolderFactory.TYPE_WIDE_IMAGE_WITH_BUTTONS
 import io.droidcrew.recycler.models.HeavyModel
 import io.droidcrew.recycler.snippet.items.*
 import java.lang.IllegalArgumentException
@@ -16,7 +16,7 @@ import java.lang.IllegalArgumentException
 object ConstraintViewHolderFactory {
 
     fun createHolder(parent: ViewGroup, viewType: Int) : ConstraintViewHolder {
-        val view = if (viewType == TYPE_RED || viewType == TYPE_ORANGE) {
+        val view = if (viewType == TYPE_SMALL_IMAGE_WITH_BUTTONS || viewType == TYPE_SMALL_IMAGE) {
             LayoutInflater.from(parent.context).inflate(R.layout.constraint_list_item, parent, false)
         } else {
             LayoutInflater.from(parent.context).inflate(R.layout.constraint_list_item_alternative, parent, false)
@@ -24,10 +24,10 @@ object ConstraintViewHolderFactory {
         //Simulation of long view creation
         Thread.sleep(40)
         return when (viewType) {
-            TYPE_RED -> RedConstraintViewHolder(view)
-            TYPE_ORANGE -> OrangeConstraintViewHolder(view)
-            TYPE_YELLOW -> YellowConstraintViewHolder(view)
-            TYPE_GREEN -> GreenConstraintViewHolder(view)
+            TYPE_SMALL_IMAGE_WITH_BUTTONS -> RedConstraintViewHolder(view)
+            TYPE_SMALL_IMAGE -> OrangeConstraintViewHolder(view)
+            TYPE_WIDE_IMAGE_WITH_BUTTONS -> YellowConstraintViewHolder(view)
+            TYPE_WIDE_IMAGE -> GreenConstraintViewHolder(view)
             else -> throw IllegalArgumentException("Unknown viewType")
         }
     }

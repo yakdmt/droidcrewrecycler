@@ -11,7 +11,7 @@ import io.droidcrew.recycler.snippet.StateRenderer
 data class ButtonViewState(val text: String) :
     SnippetViewState
 
-open class ButtonView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
+class ButtonView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
     AppCompatButton(context, attrs, defStyleAttr),
     StateRenderer<ButtonViewState> {
 

@@ -4,41 +4,42 @@ import android.content.Context
 import android.graphics.Typeface
 import android.util.AttributeSet
 import android.util.TypedValue
+import android.widget.TextView
 import androidx.appcompat.widget.AppCompatTextView
 import io.droidcrew.recycler.snippet.SnippetViewHolder
 import io.droidcrew.recycler.snippet.SnippetViewState
 import io.droidcrew.recycler.snippet.StateRenderer
 
 
-data class TitleViewState(val text: String) :
+data class SublineViewState(val text: String) :
     SnippetViewState
 
-class TitleView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
+class SublineView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
     AppCompatTextView(context, attrs, defStyleAttr),
-    StateRenderer<TitleViewState> {
+    StateRenderer<SublineViewState> {
 
     init {
-        setTypeface(null, Typeface.BOLD)
-        setTextSize(TypedValue.COMPLEX_UNIT_SP,18f)
+        setTypeface(Typeface.MONOSPACE, Typeface.NORMAL)
+        setTextSize(TypedValue.COMPLEX_UNIT_SP,16f)
     }
 
-    override fun render(state: TitleViewState) {
+    override fun render(state: SublineViewState) {
         text = state.text
     }
 }
 
-class TitleViewHolder(view: TitleView) : SnippetViewHolder(view) {
+class SublineViewHolder(view: SublineView) : SnippetViewHolder(view) {
 
     companion object {
         fun create(context: Context) =
-            TitleViewHolder(
-                TitleView(context)
+            SublineViewHolder(
+                SublineView(context)
             )
     }
 
-    private val textView = itemView as TitleView
+    private val textView = itemView as TextView
 
     override fun render(state: SnippetViewState) {
-        textView.render(state as TitleViewState)
+        textView.text = (state as SublineViewState).text
     }
 }

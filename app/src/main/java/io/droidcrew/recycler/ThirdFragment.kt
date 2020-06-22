@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import io.droidcrew.recycler.models.HeavyModelFactory
 import io.droidcrew.recycler.snippet.SnippetListAdapter
 import io.droidcrew.recycler.snippet.SnippetRecyclerViewState
-import io.droidcrew.recycler.snippet.items.TitleViewState
+import io.droidcrew.recycler.snippet.items.*
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -30,14 +30,17 @@ class ThirdFragment : Fragment() {
 
         view.findViewById<RecyclerView>(R.id.recycler_view).apply {
             adapter = SnippetListAdapter(HeavyModelFactory.create(500).map { SnippetRecyclerViewState(
-                listOf(
+                listOfNotNull(
                     TitleViewState(it.title),
-                    TitleViewState(it.title)
+                    DescriptionViewState(it.title),
+                    ImageViewState(it.widePicture),
+                    if (it.withButtons) ButtonViewState(it.title) else null,
+                    SublineViewState("Subline")
                 )
             ) })
             layoutManager = LinearLayoutManager(activity)
             adapter?.notifyDataSetChanged()
-            setRecycledViewPool((activity as MainActivity).viewPool)
+//            setRecycledViewPool((activity as MainActivity).viewPool)
         }
     }
 }

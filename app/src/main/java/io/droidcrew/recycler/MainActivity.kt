@@ -1,11 +1,14 @@
 package io.droidcrew.recycler
 
+import android.app.Activity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.Button
 import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import io.droidcrew.recycler.api.PrefetchRecycledViewPool
+import io.droidcrew.recycler.api.PrefetchedViewsCountListener
 import io.droidcrew.recycler.framecounter.DroppedFrameCounter
 import io.droidcrew.recycler.framecounter.DroppedFramesListener
 import timber.log.Timber
@@ -16,7 +19,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var droppedFramesText: TextView
     private lateinit var clearDroppedFrames: Button
 
-    val viewPool = RecyclerView.RecycledViewPool()
+    internal val viewPool = PrefetchRecycledViewPool(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +59,13 @@ class MainActivity : AppCompatActivity() {
             droppedFramesText.text = "Dropped frames: 0"
         }
 
+        viewPool.start()
+    }
+
+
+    override fun onDestroy() {
+        viewPool.terminate()
+        super.onDestroy()
     }
 
 }
