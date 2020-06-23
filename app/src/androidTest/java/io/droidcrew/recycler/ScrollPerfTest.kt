@@ -27,11 +27,12 @@ class ScrollPerfTest {
         processName = PACKAGE_NAME,
         perfType = PerformanceTest.PerfType.NUM_JANKY,
         threshold = 1,
-        assertionType = PerformanceTest.AssertionType.LESS_OR_EQUAL
+        assertionType = PerformanceTest.AssertionType.LESS_OR_EQUAL,
+        tag = "Constraint"
     )
     fun testFirst() {
 
-        Espresso.onView(ViewMatchers.withId(R.id.button_first))
+        Espresso.onView(ViewMatchers.withText("First list"))
             .perform(ViewActions.click())
 
         SystemClock.sleep(1000)
@@ -48,11 +49,12 @@ class ScrollPerfTest {
         processName = PACKAGE_NAME,
         perfType = PerformanceTest.PerfType.NUM_JANKY,
         threshold = 1,
-        assertionType = PerformanceTest.AssertionType.LESS_OR_EQUAL
+        assertionType = PerformanceTest.AssertionType.LESS_OR_EQUAL,
+        tag = "Linear   "
     )
     fun testSecond() {
 
-        Espresso.onView(ViewMatchers.withId(R.id.button_second))
+        Espresso.onView(ViewMatchers.withText("Second list"))
             .perform(ViewActions.click())
 
         SystemClock.sleep(1000)
@@ -69,11 +71,12 @@ class ScrollPerfTest {
         processName = PACKAGE_NAME,
         perfType = PerformanceTest.PerfType.NUM_JANKY,
         threshold = 1,
-        assertionType = PerformanceTest.AssertionType.LESS_OR_EQUAL
+        assertionType = PerformanceTest.AssertionType.LESS_OR_EQUAL,
+        tag = "Recycler  "
     )
     fun testThird() {
 
-        Espresso.onView(ViewMatchers.withId(R.id.button_third))
+        Espresso.onView(ViewMatchers.withText("Third list"))
             .perform(ViewActions.click())
 
         SystemClock.sleep(1000)

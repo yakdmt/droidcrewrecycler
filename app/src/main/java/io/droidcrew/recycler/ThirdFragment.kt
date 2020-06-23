@@ -32,11 +32,12 @@ class ThirdFragment : Fragment() {
             adapter = SnippetListAdapter(HeavyModelFactory.create(500).map { SnippetRecyclerViewState(
                 listOfNotNull(
                     TitleViewState(it.title),
-                    DescriptionViewState(it.title),
+                    DescriptionViewState(it.description),
                     ImageViewState(it.widePicture),
-                    if (it.withButtons) ButtonViewState(it.title) else null,
+                    if (it.withButtons) ButtonViewState("Button") else null,
                     SublineViewState("Subline")
-                )
+                ),
+                alternative = it.widePicture
             ) })
             layoutManager = LinearLayoutManager(activity)
             adapter?.notifyDataSetChanged()

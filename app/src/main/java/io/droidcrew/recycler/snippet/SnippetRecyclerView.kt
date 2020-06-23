@@ -4,8 +4,9 @@ import android.content.Context
 import android.util.AttributeSet
 import androidx.recyclerview.widget.RecyclerView
 import io.droidcrew.recycler.snippet.layout.SnippetLayoutManager
+import io.droidcrew.recycler.snippet.layout.SnippetLayoutType
 
-data class SnippetRecyclerViewState(val items: List<SnippetViewState>)
+data class SnippetRecyclerViewState(val items: List<SnippetViewState>, val alternative: Boolean)
 
 class SnippetRecyclerView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
     RecyclerView(context, attrs, defStyleAttr) {
@@ -30,5 +31,10 @@ class SnippetRecyclerViewHolder(view: SnippetRecyclerView) : RecyclerView.ViewHo
 
     fun render(state: SnippetRecyclerViewState) {
         recycler.render(state)
+        (recycler.layoutManager as SnippetLayoutManager).snippetLayoutType = if (state.alternative) {
+            SnippetLayoutType.ALTERNATIVE
+        } else {
+            SnippetLayoutType.NORMAL
+        }
     }
 }

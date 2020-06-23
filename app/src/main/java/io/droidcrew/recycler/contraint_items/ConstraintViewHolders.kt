@@ -22,7 +22,7 @@ object ConstraintViewHolderFactory {
             LayoutInflater.from(parent.context).inflate(R.layout.constraint_list_item_alternative, parent, false)
         }
         //Simulation of long view creation
-        Thread.sleep(40)
+//        Thread.sleep(40)
         return when (viewType) {
             TYPE_SMALL_IMAGE_WITH_BUTTONS -> RedConstraintViewHolder(view)
             TYPE_SMALL_IMAGE -> OrangeConstraintViewHolder(view)

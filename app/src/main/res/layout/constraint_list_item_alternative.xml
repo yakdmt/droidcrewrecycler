@@ -8,13 +8,12 @@
 
     <io.droidcrew.recycler.snippet.items.SomeImageView
         android:id="@+id/image"
-        android:layout_width="match_parent"
-        android:layout_height="64dp"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
         android:src="@color/colorPrimaryDark"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        >
-    </io.droidcrew.recycler.snippet.items.SomeImageView>
+        />
 
     <io.droidcrew.recycler.snippet.items.TitleView
         android:id="@+id/title"
