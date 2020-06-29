@@ -18,8 +18,8 @@ internal class SnippetViews {
     fun fill(recycler: RecyclerView.Recycler, state: RecyclerView.State, snippetLayoutType: SnippetLayoutType) {
         clear()
 
-        val ratingView: View? = null
         var buttonView: View? = null
+        var secondButtonView: View? = null
 
         var firstSublineView: View? = null
 
@@ -28,7 +28,9 @@ internal class SnippetViews {
                 is SomeImageView -> if (topRightView == null) topRightView = view else IllegalStateException("More than one topRightView in layout! $topRightView and $view existed")
                 is TitleView -> if (titleView == null) titleView = view else IllegalStateException("More than one header in layout!")
                 is DescriptionView -> if (descriptionViews.size < 2) descriptionViews.add(view) else IllegalStateException("More than two descriptions in layout!")
-                is ButtonView -> if (buttonView == null) buttonView = view else IllegalStateException("More than one estimate time in layout!")
+                is ButtonView -> if (buttonView == null) buttonView = view else {
+                    secondButtonView = view
+                }
                 is SublineView -> {
                     if (firstSublineView == null) firstSublineView = view
                     middleViews += view
@@ -40,16 +42,16 @@ internal class SnippetViews {
         leftBasementView = when (snippetLayoutType) {
             SnippetLayoutType.NORMAL -> buttonView
             SnippetLayoutType.ALTERNATIVE -> {
-                topRightView.also { topRightView = null }
+                topRightView.also { topRightView = secondButtonView }
             }
         }
 
         rightBasementView = when (snippetLayoutType) {
-            SnippetLayoutType.NORMAL -> firstSublineView?.also { middleViews -= it }
+            SnippetLayoutType.NORMAL -> secondButtonView
             SnippetLayoutType.ALTERNATIVE -> buttonView
         }
 
-        belowDescriptionView = ratingView ?: firstSublineView.takeIf { it !== leftBasementView }?.also { middleViews -= it }
+        belowDescriptionView = firstSublineView.takeIf { it !== leftBasementView }?.also { middleViews -= it }
     }
 
     private fun clear() {

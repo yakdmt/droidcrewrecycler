@@ -1,14 +1,12 @@
 package io.droidcrew.recycler.api
 
 import android.app.Activity
-import android.util.Log
 import android.util.SparseIntArray
 import android.view.ViewGroup
 import androidx.recyclerview.widget.*
 import androidx.recyclerview.widget.attachToPreventViewPoolFromClearing
 import androidx.recyclerview.widget.factorInCreateTime
 import timber.log.Timber
-import io.droidcrew.recycler.BuildConfig
 import io.droidcrew.recycler.OffthreadViewCreator
 import io.droidcrew.recycler.RecyclerPrefetchingLogger
 import kotlin.math.max
@@ -82,8 +80,8 @@ class PrefetchRecycledViewPool(activity: Activity) : RecyclerView.RecycledViewPo
 
     private fun calculatePrefetchedCount(): Int {
         var result = 0
-        for (i in 0..createdRegistry.size()) {
-            result += createdRegistry[i]
+        for (i in 0 until createdRegistry.size()) {
+            result += createdRegistry.valueAt(i)
         }
         return result
     }

@@ -1,23 +1,34 @@
 package io.droidcrew.recycler
 
-import android.app.Activity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.Switch
 import android.widget.TextView
-import androidx.navigation.fragment.findNavController
 import io.droidcrew.recycler.api.PrefetchRecycledViewPool
 import io.droidcrew.recycler.api.PrefetchedViewsCountListener
-import io.droidcrew.recycler.contraint_items.ConstraintViewHolderFactory
-import io.droidcrew.recycler.list.HeavyViewHolderFactory.TYPE_SMALL_IMAGE
-import io.droidcrew.recycler.list.HeavyViewHolderFactory.TYPE_SMALL_IMAGE_WITH_BUTTONS
-import io.droidcrew.recycler.list.HeavyViewHolderFactory.TYPE_WIDE_IMAGE
-import io.droidcrew.recycler.list.HeavyViewHolderFactory.TYPE_WIDE_IMAGE_WITH_BUTTONS
+import io.droidcrew.recycler.items.ConstraintViewHolderFactory
+import io.droidcrew.recycler.items.ConstraintViewHolderFactory.CONSTRAINT_TYPE_STYLE_ALTERNATIVE
+import io.droidcrew.recycler.items.ConstraintViewHolderFactory.CONSTRAINT_TYPE_STYLE_ALTERNATIVE_ONE_BUTTON
+import io.droidcrew.recycler.items.ConstraintViewHolderFactory.CONSTRAINT_TYPE_STYLE_NORMAL
+import io.droidcrew.recycler.items.ConstraintViewHolderFactory.CONSTRAINT_TYPE_STYLE_NO_SUBLINE
+import io.droidcrew.recycler.items.ConstraintViewHolderFactory.CONSTRAINT_TYPE_STYLE_ONE_BUTTON
+import io.droidcrew.recycler.items.LinearViewHolderFactory
+import io.droidcrew.recycler.items.LinearViewHolderFactory.LINEAR_TYPE_STYLE_ALTERNATIVE
+import io.droidcrew.recycler.items.LinearViewHolderFactory.LINEAR_TYPE_STYLE_ALTERNATIVE_ONE_BUTTON
+import io.droidcrew.recycler.items.LinearViewHolderFactory.LINEAR_TYPE_STYLE_NORMAL
+import io.droidcrew.recycler.items.LinearViewHolderFactory.LINEAR_TYPE_STYLE_NO_SUBLINE
+import io.droidcrew.recycler.items.LinearViewHolderFactory.LINEAR_TYPE_STYLE_ONE_BUTTON
+import io.droidcrew.recycler.snippet.SnippetViewHolderFactory
+import io.droidcrew.recycler.snippet.SnippetViewHolderFactory.TYPE_BUTTON
+import io.droidcrew.recycler.snippet.SnippetViewHolderFactory.TYPE_DESCRIPTION
+import io.droidcrew.recycler.snippet.SnippetViewHolderFactory.TYPE_IMAGE
+import io.droidcrew.recycler.snippet.SnippetViewHolderFactory.TYPE_SNIPPET_RECYCLER
+import io.droidcrew.recycler.snippet.SnippetViewHolderFactory.TYPE_SUBLINE
+import io.droidcrew.recycler.snippet.SnippetViewHolderFactory.TYPE_TITLE
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -49,20 +60,73 @@ class HomeFragment : Fragment() {
         usePrefetcherSwitch = view.findViewById(R.id.use_prefetcher_switch)
         usePrefetcherSwitch.setOnCheckedChangeListener { _, value ->
             if (value) {
-                viewPool.setPrefetchedViewsCount(TYPE_SMALL_IMAGE_WITH_BUTTONS, 10) { fakeParent, viewType ->
+
+                viewPool.setMaxRecycledViews(CONSTRAINT_TYPE_STYLE_NORMAL, 10)
+                viewPool.setPrefetchedViewsCount(CONSTRAINT_TYPE_STYLE_NORMAL, 10) { fakeParent, viewType ->
                     ConstraintViewHolderFactory.createHolder(fakeParent, viewType)
                 }
-                viewPool.setPrefetchedViewsCount(TYPE_SMALL_IMAGE, 10) { fakeParent, viewType ->
+                viewPool.setMaxRecycledViews(CONSTRAINT_TYPE_STYLE_ALTERNATIVE, 10)
+                viewPool.setPrefetchedViewsCount(CONSTRAINT_TYPE_STYLE_ALTERNATIVE, 10) { fakeParent, viewType ->
                     ConstraintViewHolderFactory.createHolder(fakeParent, viewType)
                 }
-                viewPool.setPrefetchedViewsCount(TYPE_WIDE_IMAGE_WITH_BUTTONS, 10) { fakeParent, viewType ->
+                viewPool.setMaxRecycledViews(CONSTRAINT_TYPE_STYLE_ONE_BUTTON, 10)
+                viewPool.setPrefetchedViewsCount(CONSTRAINT_TYPE_STYLE_ONE_BUTTON, 10) { fakeParent, viewType ->
                     ConstraintViewHolderFactory.createHolder(fakeParent, viewType)
                 }
-                viewPool.setPrefetchedViewsCount(TYPE_WIDE_IMAGE, 10) { fakeParent, viewType ->
+                viewPool.setMaxRecycledViews(CONSTRAINT_TYPE_STYLE_ALTERNATIVE_ONE_BUTTON, 10)
+                viewPool.setPrefetchedViewsCount(CONSTRAINT_TYPE_STYLE_ALTERNATIVE_ONE_BUTTON, 10) { fakeParent, viewType ->
                     ConstraintViewHolderFactory.createHolder(fakeParent, viewType)
                 }
-            } else {
-                viewPool.clear()
+                viewPool.setMaxRecycledViews(CONSTRAINT_TYPE_STYLE_NO_SUBLINE, 10)
+                viewPool.setPrefetchedViewsCount(CONSTRAINT_TYPE_STYLE_NO_SUBLINE, 10) { fakeParent, viewType ->
+                    ConstraintViewHolderFactory.createHolder(fakeParent, viewType)
+                }
+
+                viewPool.setMaxRecycledViews(LINEAR_TYPE_STYLE_NORMAL, 10)
+                viewPool.setPrefetchedViewsCount(LINEAR_TYPE_STYLE_NORMAL, 10) { fakeParent, viewType ->
+                    LinearViewHolderFactory.createHolder(fakeParent, viewType)
+                }
+                viewPool.setMaxRecycledViews(LINEAR_TYPE_STYLE_ALTERNATIVE, 10)
+                viewPool.setPrefetchedViewsCount(LINEAR_TYPE_STYLE_ALTERNATIVE, 10) { fakeParent, viewType ->
+                    LinearViewHolderFactory.createHolder(fakeParent, viewType)
+                }
+                viewPool.setMaxRecycledViews(LINEAR_TYPE_STYLE_ONE_BUTTON, 10)
+                viewPool.setPrefetchedViewsCount(LINEAR_TYPE_STYLE_ONE_BUTTON, 10) { fakeParent, viewType ->
+                    LinearViewHolderFactory.createHolder(fakeParent, viewType)
+                }
+                viewPool.setMaxRecycledViews(LINEAR_TYPE_STYLE_ALTERNATIVE_ONE_BUTTON, 10)
+                viewPool.setPrefetchedViewsCount(LINEAR_TYPE_STYLE_ALTERNATIVE_ONE_BUTTON, 10) { fakeParent, viewType ->
+                    LinearViewHolderFactory.createHolder(fakeParent, viewType)
+                }
+                viewPool.setMaxRecycledViews(LINEAR_TYPE_STYLE_NO_SUBLINE, 10)
+                viewPool.setPrefetchedViewsCount(LINEAR_TYPE_STYLE_NO_SUBLINE, 10) { fakeParent, viewType ->
+                    LinearViewHolderFactory.createHolder(fakeParent, viewType)
+                }
+
+                viewPool.setMaxRecycledViews(TYPE_SNIPPET_RECYCLER, 10)
+                viewPool.setPrefetchedViewsCount(TYPE_SNIPPET_RECYCLER, 10) { fakeParent, viewType ->
+                    SnippetViewHolderFactory.createRecyclerHolder(fakeParent, viewType)
+                }
+                viewPool.setMaxRecycledViews(TYPE_TITLE, 10)
+                viewPool.setPrefetchedViewsCount(TYPE_TITLE, 10) { fakeParent, viewType ->
+                    SnippetViewHolderFactory.createHolder(fakeParent, viewType)
+                }
+                viewPool.setMaxRecycledViews(TYPE_DESCRIPTION, 10)
+                viewPool.setPrefetchedViewsCount(TYPE_DESCRIPTION, 10) { fakeParent, viewType ->
+                    SnippetViewHolderFactory.createHolder(fakeParent, viewType)
+                }
+                viewPool.setMaxRecycledViews(TYPE_IMAGE, 10)
+                viewPool.setPrefetchedViewsCount(TYPE_IMAGE, 10) { fakeParent, viewType ->
+                    SnippetViewHolderFactory.createHolder(fakeParent, viewType)
+                }
+                viewPool.setMaxRecycledViews(TYPE_BUTTON, 10)
+                viewPool.setPrefetchedViewsCount(TYPE_BUTTON, 10) { fakeParent, viewType ->
+                    SnippetViewHolderFactory.createHolder(fakeParent, viewType)
+                }
+                viewPool.setMaxRecycledViews(TYPE_SUBLINE, 10)
+                viewPool.setPrefetchedViewsCount(TYPE_SUBLINE, 10) { fakeParent, viewType ->
+                    SnippetViewHolderFactory.createHolder(fakeParent, viewType)
+                }
             }
         }
         useGapworkerSwitch = view.findViewById(R.id.use_gapworker_switch)

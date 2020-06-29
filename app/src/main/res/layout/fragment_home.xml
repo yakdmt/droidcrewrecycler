@@ -27,7 +27,7 @@
             android:indeterminate="false"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="8dp"
-            android:max="40"
+            android:max="160"
             android:layout_width="match_parent"
             android:layout_height="16dp" />
 

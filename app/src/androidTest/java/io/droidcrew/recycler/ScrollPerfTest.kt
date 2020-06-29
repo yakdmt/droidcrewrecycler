@@ -10,6 +10,8 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
+private const val PREFETCH_ITEMS = true
+
 class ScrollPerfTest {
 
     private lateinit var device: UiDevice
@@ -26,19 +28,25 @@ class ScrollPerfTest {
     @PerformanceTest(
         processName = PACKAGE_NAME,
         perfType = PerformanceTest.PerfType.NUM_JANKY,
-        threshold = 1,
+        threshold = 100,
         assertionType = PerformanceTest.AssertionType.LESS_OR_EQUAL,
         tag = "Constraint"
     )
     fun testFirst() {
 
-        Espresso.onView(ViewMatchers.withText("First list"))
+        if (PREFETCH_ITEMS) {
+            Espresso.onView(ViewMatchers.withText("Use prefetcher"))
+                .perform(ViewActions.click())
+            SystemClock.sleep(1000)
+        }
+
+        Espresso.onView(ViewMatchers.withText("Constraint"))
             .perform(ViewActions.click())
 
         SystemClock.sleep(1000)
 
         mainActivityActivityTestRule.startIteration()
-        for (i in 0..10) {
+        for (i in 0..5) {
             device.swipe(200, 1500, 500, 700, 5)
             SystemClock.sleep(500)
         }
@@ -48,19 +56,25 @@ class ScrollPerfTest {
     @PerformanceTest(
         processName = PACKAGE_NAME,
         perfType = PerformanceTest.PerfType.NUM_JANKY,
-        threshold = 1,
+        threshold = 100,
         assertionType = PerformanceTest.AssertionType.LESS_OR_EQUAL,
-        tag = "Linear   "
+        tag = "Linear    "
     )
     fun testSecond() {
 
-        Espresso.onView(ViewMatchers.withText("Second list"))
+        if (PREFETCH_ITEMS) {
+            Espresso.onView(ViewMatchers.withText("Use prefetcher"))
+                .perform(ViewActions.click())
+            SystemClock.sleep(1000)
+        }
+
+        Espresso.onView(ViewMatchers.withText("Linear"))
             .perform(ViewActions.click())
 
         SystemClock.sleep(1000)
 
         mainActivityActivityTestRule.startIteration()
-        for (i in 0..10) {
+        for (i in 0..5) {
             device.swipe(200, 1500, 500, 700, 5)
             SystemClock.sleep(500)
         }
@@ -70,19 +84,25 @@ class ScrollPerfTest {
     @PerformanceTest(
         processName = PACKAGE_NAME,
         perfType = PerformanceTest.PerfType.NUM_JANKY,
-        threshold = 1,
+        threshold = 100,
         assertionType = PerformanceTest.AssertionType.LESS_OR_EQUAL,
         tag = "Recycler  "
     )
     fun testThird() {
 
-        Espresso.onView(ViewMatchers.withText("Third list"))
+        if (PREFETCH_ITEMS) {
+            Espresso.onView(ViewMatchers.withText("Use prefetcher"))
+                .perform(ViewActions.click())
+            SystemClock.sleep(1000)
+        }
+
+        Espresso.onView(ViewMatchers.withText("Recycler"))
             .perform(ViewActions.click())
 
         SystemClock.sleep(1000)
 
         mainActivityActivityTestRule.startIteration()
-        for (i in 0..10) {
+        for (i in 0..5) {
             device.swipe(200, 1500, 500, 700, 5)
             SystemClock.sleep(500)
         }

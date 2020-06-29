@@ -2,8 +2,10 @@ package io.droidcrew.recycler.snippet.items
 
 import android.content.Context
 import android.util.AttributeSet
+import android.view.ContextThemeWrapper
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
+import io.droidcrew.recycler.R
 import io.droidcrew.recycler.snippet.SnippetViewHolder
 import io.droidcrew.recycler.snippet.SnippetViewState
 import io.droidcrew.recycler.snippet.StateRenderer
@@ -11,8 +13,8 @@ import io.droidcrew.recycler.snippet.StateRenderer
 data class ButtonViewState(val text: String) :
     SnippetViewState
 
-class ButtonView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
-    AppCompatButton(context, attrs, defStyleAttr),
+class ButtonView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = R.attr.buttonViewStyle) :
+    AppCompatButton(ContextThemeWrapper(context, R.style.SnippetTheme), attrs, defStyleAttr),
     StateRenderer<ButtonViewState> {
 
     override fun render(state: ButtonViewState) {

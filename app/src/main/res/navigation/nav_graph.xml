@@ -30,23 +30,23 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="io.droidcrew.recycler.FirstFragment"
+        android:name="io.droidcrew.recycler.ConstraintFragment"
         android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
+        tools:layout="@layout/fragment_constraint">
     </fragment>
 
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="io.droidcrew.recycler.SecondFragment"
+        android:name="io.droidcrew.recycler.LinearFragment"
         android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
+        tools:layout="@layout/fragment_linear">
     </fragment>
 
     <fragment
         android:id="@+id/ThirdFragment"
-        android:name="io.droidcrew.recycler.ThirdFragment"
+        android:name="io.droidcrew.recycler.RecyclerFragment"
         android:label="@string/third_fragment_label"
-        tools:layout="@layout/fragment_third">
+        tools:layout="@layout/fragment_recycler">
     </fragment>
 
 </navigation>

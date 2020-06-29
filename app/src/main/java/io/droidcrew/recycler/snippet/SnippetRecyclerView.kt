@@ -2,9 +2,13 @@ package io.droidcrew.recycler.snippet
 
 import android.content.Context
 import android.util.AttributeSet
+import androidx.core.view.updatePadding
 import androidx.recyclerview.widget.RecyclerView
+import io.droidcrew.recycler.snippet.items.TitleView
+import io.droidcrew.recycler.snippet.items.TitleViewHolder
 import io.droidcrew.recycler.snippet.layout.SnippetLayoutManager
 import io.droidcrew.recycler.snippet.layout.SnippetLayoutType
+import io.droidcrew.recycler.utils.dp
 
 data class SnippetRecyclerViewState(val items: List<SnippetViewState>, val alternative: Boolean)
 
@@ -16,6 +20,7 @@ class SnippetRecyclerView @JvmOverloads constructor(context: Context, attrs: Att
     init {
         this.layoutManager = SnippetLayoutManager()
         setAdapter(adapter)
+        updatePadding(16.dp, 16.dp, 16.dp, 16.dp)
     }
 
     fun render(state: SnippetRecyclerViewState) {
@@ -26,6 +31,13 @@ class SnippetRecyclerView @JvmOverloads constructor(context: Context, attrs: Att
 }
 
 class SnippetRecyclerViewHolder(view: SnippetRecyclerView) : RecyclerView.ViewHolder(view) {
+
+    companion object {
+        fun create(context: Context) =
+            SnippetRecyclerViewHolder(
+                SnippetRecyclerView(context)
+            )
+    }
 
     private val recycler = itemView as SnippetRecyclerView
 
