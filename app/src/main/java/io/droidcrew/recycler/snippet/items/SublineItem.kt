@@ -4,7 +4,6 @@ import android.content.Context
 import android.graphics.Typeface
 import android.util.AttributeSet
 import android.util.TypedValue
-import android.widget.TextView
 import androidx.appcompat.widget.AppCompatTextView
 import io.droidcrew.recycler.snippet.SnippetViewHolder
 import io.droidcrew.recycler.snippet.SnippetViewState
@@ -24,7 +23,7 @@ class SublineView @JvmOverloads constructor(context: Context, attrs: AttributeSe
     }
 
     override fun render(state: SublineViewState) {
-        text = state.text
+        text = String.format("Subline: %s", state.text)
     }
 }
 
@@ -37,9 +36,9 @@ class SublineViewHolder(view: SublineView) : SnippetViewHolder(view) {
             )
     }
 
-    private val textView = itemView as TextView
+    private val textView = itemView as SublineView
 
     override fun render(state: SnippetViewState) {
-        textView.text = (state as SublineViewState).text
+        textView.render(state as SublineViewState)
     }
 }

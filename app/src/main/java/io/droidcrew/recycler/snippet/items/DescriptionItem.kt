@@ -4,8 +4,10 @@ import android.content.Context
 import android.graphics.Typeface
 import android.util.AttributeSet
 import android.util.TypedValue
-import android.widget.TextView
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.text.PrecomputedTextCompat
+import androidx.core.widget.TextViewCompat
+import io.droidcrew.recycler.R
 import io.droidcrew.recycler.snippet.SnippetViewHolder
 import io.droidcrew.recycler.snippet.SnippetViewState
 import io.droidcrew.recycler.snippet.StateRenderer
@@ -24,7 +26,11 @@ class DescriptionView @JvmOverloads constructor(context: Context, attrs: Attribu
     }
 
     override fun render(state: DescriptionViewState) {
-        text = state.text
+        val text = context.resources.getString(R.string.description_text_template, state.text)
+        setTextFuture(
+            PrecomputedTextCompat.getTextFuture(text,
+            TextViewCompat.getTextMetricsParams(this),
+            /*optional custom executor*/ null))
     }
 }
 
@@ -37,9 +43,9 @@ class DescriptionViewHolder(view: DescriptionView) : SnippetViewHolder(view) {
             )
     }
 
-    private val textView = itemView as TextView
+    private val textView = itemView as DescriptionView
 
     override fun render(state: SnippetViewState) {
-        textView.text = (state as DescriptionViewState).text
+        textView.render(state as DescriptionViewState)
     }
 }
