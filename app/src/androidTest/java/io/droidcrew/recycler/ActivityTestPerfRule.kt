@@ -44,9 +44,9 @@ open class ActivityPerfTestRule<T: Activity>(activityClass: Class<T>): ActivityT
             val results = it.stopIteration()
             val res: Double = results?.get(annotation?.perfType?.type) as Double
 
-            printMetricsToLogcat(results)
+            printMetricsToLogcat(results, annotation?.tag ?: "")
 
-            val assertion = when(annotation?.assertionType) {
+            val assertion = when (annotation?.assertionType) {
                 PerformanceTest.AssertionType.LESS -> res < annotation!!.threshold
                 PerformanceTest.AssertionType.LESS_OR_EQUAL -> res <= annotation!!.threshold
                 PerformanceTest.AssertionType.GREATER -> res > annotation!!.threshold
@@ -66,13 +66,13 @@ open class ActivityPerfTestRule<T: Activity>(activityClass: Class<T>): ActivityT
         super.afterActivityFinished()
     }
 
-    private fun printMetricsToLogcat(results: Bundle) {
+    private fun printMetricsToLogcat(results: Bundle, tag: String) {
         val totalFrames = results.get(PerformanceTest.PerfType.TOTAL_FRAMES.type).toString().padEnd(5,' ')
         val jankyFrames = results.get(PerformanceTest.PerfType.NUM_JANKY.type).toString().padEnd(5, ' ')
         val percentile90 = results.get(PerformanceTest.PerfType.FRAME_TIME_90TH.type).toString().padEnd(3, ' ')
         val percentile95 = results.get(PerformanceTest.PerfType.FRAME_TIME_95TH.type).toString().padEnd(3, ' ')
         val percentile99 = results.get(PerformanceTest.PerfType.FRAME_TIME_99TH.type).toString().padEnd(3, ' ')
-        Timber.d("TOTAL = $totalFrames JANKY = $jankyFrames P_90TH = $percentile90 P_95TH = $percentile95 P_99TH = $percentile99")
+        Timber.d("LAYOUT = $tag TOTAL = $totalFrames JANKY = $jankyFrames P_90TH = $percentile90 P_95TH = $percentile95 P_99TH = $percentile99")
     }
 
     companion object {

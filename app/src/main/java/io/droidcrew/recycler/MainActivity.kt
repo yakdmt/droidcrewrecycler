@@ -1,16 +1,24 @@
 package io.droidcrew.recycler
 
 import android.os.Bundle
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
-import android.view.Menu
-import android.view.MenuItem
 import android.widget.Button
+import android.widget.TextView
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
+import io.droidcrew.recycler.api.PrefetchRecycledViewPool
+import io.droidcrew.recycler.framecounter.DroppedFrameCounter
+import io.droidcrew.recycler.framecounter.DroppedFramesListener
+import io.droidcrew.recycler.models.DataModelsFactory
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var droppedFrameCounter: DroppedFrameCounter
+    private lateinit var droppedFramesText: TextView
+    private lateinit var clearDroppedFrames: Button
+
+    internal val viewPool = PrefetchRecycledViewPool(this)
+
+    val data = DataModelsFactory.create(100)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,21 +40,29 @@ class MainActivity : AppCompatActivity() {
         findViewById<Button>(R.id.button_third).setOnClickListener {
             findNavController(R.id.nav_host_fragment).navigate(R.id.action_to_ThirdFragment)
         }
-    }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
-    }
+        droppedFramesText = findViewById(R.id.dropped_frames_count)
+        clearDroppedFrames = findViewById(R.id.clear_dropped_frames)
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
+        droppedFrameCounter = DroppedFrameCounter(this)
+        droppedFrameCounter.framesListener = object : DroppedFramesListener {
+            override fun onFramesCounterChanged(count: Int) {
+                droppedFramesText.text = "Dropped frames: $count"
+            }
         }
+
+        clearDroppedFrames.setOnClickListener {
+            droppedFrameCounter.reset()
+            droppedFramesText.text = "Dropped frames: 0"
+        }
+
+        viewPool.start()
     }
+
+
+    override fun onDestroy() {
+        viewPool.terminate()
+        super.onDestroy()
+    }
+
 }

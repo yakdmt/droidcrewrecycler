@@ -23,9 +23,11 @@
     <include layout="@layout/content_main" />
 
     <LinearLayout
+        android:id="@+id/layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom">
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="40dp">
 
         <Button
             android:id="@+id/button_home"
@@ -37,13 +39,13 @@
             android:id="@+id/button_first"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="First list" />
+            android:text="Constraint" />
 
         <Button
             android:id="@+id/button_second"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Second list"
+            android:text="Linear"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -52,10 +54,32 @@
             android:id="@+id/button_third"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Third list"
+            android:text="Recycler"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/button_second" />
 
     </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:layout_gravity="bottom">
+
+        <TextView
+            android:id="@+id/dropped_frames_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|start"
+            android:textColor="#FFFFFF"/>
+
+        <Button
+            android:id="@+id/clear_dropped_frames"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="Clear counter"
+            android:layout_gravity="center_vertical|end"/>
+
+    </FrameLayout>
 
 </FrameLayout>

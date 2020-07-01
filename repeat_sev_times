@@ -1,0 +1,7 @@
+for i in {1..100}
+do
+    echo Test Number $i
+    adb shell am instrument -w -e class io.droidcrew.recycler.ScrollPerfTest#testFirst io.droidcrew.recycler.test/androidx.test.runner.AndroidJUnitRunner
+    adb shell am instrument -w -e class io.droidcrew.recycler.ScrollPerfTest#testSecond io.droidcrew.recycler.test/androidx.test.runner.AndroidJUnitRunner
+    adb shell am instrument -w -e class io.droidcrew.recycler.ScrollPerfTest#testThird io.droidcrew.recycler.test/androidx.test.runner.AndroidJUnitRunner
+done

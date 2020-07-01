@@ -6,7 +6,8 @@ annotation class PerformanceTest(
     val processName: String = "",
     val perfType: PerfType = PerfType.TOTAL_FRAMES,
     val threshold: Int = Int.MAX_VALUE,
-    val assertionType: AssertionType = AssertionType.LESS_OR_EQUAL
+    val assertionType: AssertionType = AssertionType.LESS_OR_EQUAL,
+    val tag: String = ""
 ) {
     enum class PerfType(val type: String) {
         TOTAL_FRAMES(KEY_TOTAL_FRAMES),
