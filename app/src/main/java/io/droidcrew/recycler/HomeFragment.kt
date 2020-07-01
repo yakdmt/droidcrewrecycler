@@ -38,7 +38,6 @@ class HomeFragment : Fragment() {
     private lateinit var viewCounter: TextView
     private lateinit var progress: ProgressBar
     private lateinit var usePrefetcherSwitch: Switch
-    private lateinit var useGapworkerSwitch: Switch
 
     private lateinit var viewPool: PrefetchRecycledViewPool
 
@@ -129,8 +128,6 @@ class HomeFragment : Fragment() {
                 }
             }
         }
-        useGapworkerSwitch = view.findViewById(R.id.use_gapworker_switch)
-
         viewPool.listener = object : PrefetchedViewsCountListener {
             override fun onViewCountChanged(count: Int) {
                 viewCounter.text = "Views prefetched: $count"

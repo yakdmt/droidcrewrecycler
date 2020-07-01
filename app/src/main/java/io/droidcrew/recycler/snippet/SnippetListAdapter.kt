@@ -8,8 +8,6 @@ import io.droidcrew.recycler.snippet.SnippetViewHolderFactory.TYPE_SNIPPET_RECYC
 
 class SnippetListAdapter(val viewPool : RecyclerView.RecycledViewPool, val items: List<SnippetRecyclerViewState>): RecyclerView.Adapter<SnippetRecyclerViewHolder>() {
 
-//    var items: List<SnippetRecyclerViewState> = emptyList()
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SnippetRecyclerViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.snippet_list_item, parent, false) as SnippetRecyclerView
         view.setRecycledViewPool(viewPool)
